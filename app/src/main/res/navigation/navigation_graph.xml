@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/countriesListFragment">
+
+    <fragment
+        android:id="@+id/countriesListFragment"
+        android:name="com.glogachev.sigmatesttask.ui.countriesList.CountryListFragment"
+        android:label="fragment_countries_list"
+        tools:layout="@layout/fragment_countries_list">
+        <action
+            android:id="@+id/action_countriesListFragment_to_countryDetailsFragment"
+            app:destination="@id/countryDetailsFragment">
+            <argument
+                android:name="country_name"
+                app:argType="string" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/countryDetailsFragment"
+        android:name="com.glogachev.sigmatesttask.ui.countryDetails.CountryDetailsFragment"
+        android:label="fragment_country_details"
+        tools:layout="@layout/fragment_country_details">
+        <argument
+            android:name="country_name"
+            app:argType="string" />
+    </fragment>
+</navigation>

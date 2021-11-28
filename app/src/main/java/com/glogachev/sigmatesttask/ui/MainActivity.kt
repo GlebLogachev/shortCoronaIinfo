@@ -1,12 +1,25 @@
 package com.glogachev.sigmatesttask.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.glogachev.sigmatesttask.R
+import androidx.appcompat.app.AppCompatActivity
+import com.glogachev.sigmatesttask.App
+import com.glogachev.sigmatesttask.databinding.ActivityMainBinding
+import com.glogachev.sigmatesttask.domain.CoronaRepository
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var repository: CoronaRepository
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        App.component.inject(this)
+        setContentView(binding.root)
     }
 }
