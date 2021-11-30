@@ -1,10 +1,12 @@
 package com.glogachev.sigmatesttask.data
 
-import com.glogachev.sigmatesttask.data.mappers.toDB
 import com.glogachev.sigmatesttask.data.db.AppDatabase
 import com.glogachev.sigmatesttask.data.db.models.CoronaCountryDetailsDB
 import com.glogachev.sigmatesttask.data.db.models.CoronaSummaryDB
+import com.glogachev.sigmatesttask.data.mappers.toDB
 import com.glogachev.sigmatesttask.domain.CoronaRepository
+import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -17,19 +19,22 @@ class CoronaRepositoryImpl @Inject constructor(
 ) : CoronaRepository {
 
 
-    override fun loadCoronaInfo(): Single<List<CoronaSummaryDB>> {
+    override fun updateCoronaInfo(): Completable {
         return api
             .getSummaryInfo()
-            .flatMap {
+            .flatMapCompletable {
                 val countriesList: List<CoronaSummaryDB> = it.toDB()
-                saveCoronaInfo(countriesList)
-                Single.just(countriesList)
+                Completable.fromCallable {
+                    saveCoronaInfo(countriesList)
+                }
             }
-            .onErrorResumeNext {
-                database
-                    .coronaSummary()
-                    .all()
-            }
+            .onErrorComplete()
+    }
+
+    override fun getCoronaListObservable(): Observable<List<CoronaSummaryDB>> {
+        return database
+            .coronaSummary()
+            .all()
     }
 
     private fun saveCoronaInfo(countriesList: List<CoronaSummaryDB>) {

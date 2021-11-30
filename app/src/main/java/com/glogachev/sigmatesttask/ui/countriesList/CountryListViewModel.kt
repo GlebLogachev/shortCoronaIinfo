@@ -17,6 +17,7 @@ class CountryListViewModel(
     private val cd = CompositeDisposable()
 
     init {
+        updateCounties()
         obtainCountriesList()
     }
 
@@ -27,7 +28,7 @@ class CountryListViewModel(
 
     private fun obtainCountriesList() {
         repository
-            .loadCoronaInfo()
+            .getCoronaListObservable()
             .schedule()
             .subscribe { list ->
                 setSuccessState(list)
@@ -36,13 +37,23 @@ class CountryListViewModel(
     }
 
     private fun setSuccessState(list: List<CoronaSummaryDB>) {
-        _state.value = CountryListState.Success(
-            initialList = list
-        )
+        if (list.isNotEmpty()) {
+            _state.value = CountryListState.Success(
+                initialList = list
+            )
+        }
+    }
+
+    private fun updateCounties() {
+        repository
+            .updateCoronaInfo()
+            .schedule()
+            .subscribe()
+
     }
 
     fun refresh() {
-        obtainCountriesList()
+        updateCounties()
     }
 
     override fun onCleared() {
