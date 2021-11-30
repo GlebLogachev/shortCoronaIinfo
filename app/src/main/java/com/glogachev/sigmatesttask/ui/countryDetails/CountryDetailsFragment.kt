@@ -22,7 +22,7 @@ class CountryDetailsFragment : Fragment() {
     @Inject
     lateinit var repository: CoronaRepository
 
-    val args: CountryDetailsFragmentArgs by navArgs<CountryDetailsFragmentArgs>()
+    private val args: CountryDetailsFragmentArgs by navArgs<CountryDetailsFragmentArgs>()
 
     private val viewModel: CountryDetailsViewModel by viewModels<CountryDetailsViewModel> {
         CountryDetailsViewModelFactory(repository)

@@ -1,8 +1,7 @@
 package com.glogachev.sigmatesttask.domain
 
-import com.glogachev.sigmatesttask.db.models.CoronaCountryDetailsDB
-import com.glogachev.sigmatesttask.db.models.CoronaSummaryDB
-import io.reactivex.Completable
+import com.glogachev.sigmatesttask.data.db.models.CoronaCountryDetailsDB
+import com.glogachev.sigmatesttask.data.db.models.CoronaSummaryDB
 import io.reactivex.Single
 
 interface CoronaRepository {

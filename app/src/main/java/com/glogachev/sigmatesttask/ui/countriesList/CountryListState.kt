@@ -1,6 +1,6 @@
 package com.glogachev.sigmatesttask.ui.countriesList
 
-import com.glogachev.sigmatesttask.db.models.CoronaSummaryDB
+import com.glogachev.sigmatesttask.data.db.models.CoronaSummaryDB
 
 sealed class CountryListState {
     data class Success(

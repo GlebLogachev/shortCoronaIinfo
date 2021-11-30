@@ -1,4 +1,4 @@
-package com.glogachev.sigmatesttask.db.models
+package com.glogachev.sigmatesttask.data.db.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

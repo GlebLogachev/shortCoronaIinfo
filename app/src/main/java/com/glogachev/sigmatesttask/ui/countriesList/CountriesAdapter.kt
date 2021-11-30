@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.glogachev.sigmatesttask.R
 import com.glogachev.sigmatesttask.databinding.CountryItemBinding
-import com.glogachev.sigmatesttask.db.models.CoronaSummaryDB
+import com.glogachev.sigmatesttask.data.db.models.CoronaSummaryDB
 
 class CountriesAdapter(
     private val onCountryCLick: (String) -> Unit

@@ -1,9 +1,9 @@
 package com.glogachev.sigmatesttask.data
 
 import com.glogachev.sigmatesttask.data.mappers.toDB
-import com.glogachev.sigmatesttask.db.AppDatabase
-import com.glogachev.sigmatesttask.db.models.CoronaCountryDetailsDB
-import com.glogachev.sigmatesttask.db.models.CoronaSummaryDB
+import com.glogachev.sigmatesttask.data.db.AppDatabase
+import com.glogachev.sigmatesttask.data.db.models.CoronaCountryDetailsDB
+import com.glogachev.sigmatesttask.data.db.models.CoronaSummaryDB
 import com.glogachev.sigmatesttask.domain.CoronaRepository
 import io.reactivex.Single
 import java.time.LocalDateTime

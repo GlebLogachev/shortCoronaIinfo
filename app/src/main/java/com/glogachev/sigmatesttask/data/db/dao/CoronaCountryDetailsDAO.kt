@@ -1,10 +1,10 @@
-package com.glogachev.sigmatesttask.db.dao
+package com.glogachev.sigmatesttask.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.glogachev.sigmatesttask.db.models.CoronaCountryDetailsDB
+import com.glogachev.sigmatesttask.data.db.models.CoronaCountryDetailsDB
 import io.reactivex.Single
 
 @Dao

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.glogachev.sigmatesttask.R
 import com.glogachev.sigmatesttask.databinding.CountryDetailsItemBinding
-import com.glogachev.sigmatesttask.db.models.CoronaCountryDetailsDB
+import com.glogachev.sigmatesttask.data.db.models.CoronaCountryDetailsDB
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter

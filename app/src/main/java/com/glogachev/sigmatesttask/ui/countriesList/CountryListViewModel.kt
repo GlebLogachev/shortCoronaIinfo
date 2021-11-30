@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.glogachev.sigmatesttask.db.models.CoronaSummaryDB
+import com.glogachev.sigmatesttask.data.db.models.CoronaSummaryDB
 import com.glogachev.sigmatesttask.domain.CoronaRepository
 import com.glogachev.sigmatesttask.utils.schedule
 import io.reactivex.disposables.CompositeDisposable
