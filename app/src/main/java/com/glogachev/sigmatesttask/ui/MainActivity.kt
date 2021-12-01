@@ -4,13 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.glogachev.sigmatesttask.App
 import com.glogachev.sigmatesttask.databinding.ActivityMainBinding
-import com.glogachev.sigmatesttask.domain.CoronaRepository
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var repository: CoronaRepository
 
     private lateinit var binding: ActivityMainBinding
 

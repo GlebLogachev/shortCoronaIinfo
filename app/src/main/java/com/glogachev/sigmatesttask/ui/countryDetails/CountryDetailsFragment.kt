@@ -1,5 +1,6 @@
 package com.glogachev.sigmatesttask.ui.countryDetails
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.glogachev.sigmatesttask.App
 import com.glogachev.sigmatesttask.databinding.FragmentCountryDetailsBinding
-import com.glogachev.sigmatesttask.domain.CoronaRepository
 import javax.inject.Inject
 
 class CountryDetailsFragment : Fragment() {
@@ -20,22 +20,25 @@ class CountryDetailsFragment : Fragment() {
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var repository: CoronaRepository
+    lateinit var factory: CountryDetailsViewModelFactory.Factory
 
     private val args: CountryDetailsFragmentArgs by navArgs<CountryDetailsFragmentArgs>()
 
     private val viewModel: CountryDetailsViewModel by viewModels<CountryDetailsViewModel> {
-        CountryDetailsViewModelFactory(repository)
+        factory.create(args.countryName)
     }
 
     private val countryDetailsAdapter = CountryDetailsAdapter()
+
+    override fun onAttach(context: Context) {
+        App.component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        App.component.inject(this)
-        viewModel.obtainCountryDetails(args.countryName)
         _binding = FragmentCountryDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -60,10 +63,10 @@ class CountryDetailsFragment : Fragment() {
         }
 
         binding.btnRetryLoading.setOnClickListener {
-            viewModel.obtainCountryDetails(args.countryName)
+            viewModel.obtainCountryDetails()
         }
         binding.swipeRefresh.setOnRefreshListener {
-            viewModel.obtainCountryDetails(args.countryName)
+            viewModel.obtainCountryDetails()
         }
     }
 

@@ -6,20 +6,28 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.glogachev.sigmatesttask.domain.CoronaRepository
 import com.glogachev.sigmatesttask.utils.schedule
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 class CountryDetailsViewModel(
+    private val countryName: String,
     private val repository: CoronaRepository
 ) : ViewModel() {
+
+    private val cd = CompositeDisposable()
+
+    init {
+        obtainCountryDetails()
+    }
 
     private val _state: MutableLiveData<CountryDetailsState> =
         MutableLiveData(CountryDetailsState.Loading)
     val state: LiveData<CountryDetailsState> get() = _state
 
-    private val cd = CompositeDisposable()
-
-    fun obtainCountryDetails(countryName: String) {
+    fun obtainCountryDetails() {
         repository
             .loadDetails(countryName)
             .schedule()
@@ -39,9 +47,19 @@ class CountryDetailsViewModel(
     }
 }
 
-class CountryDetailsViewModelFactory(private val repository: CoronaRepository) :
+class CountryDetailsViewModelFactory @AssistedInject constructor(
+    @Assisted(COUNTRY_NAME_PARAM) private val countryName: String,
+    private val repository: CoronaRepository
+) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return CountryDetailsViewModel(repository) as T
+        return CountryDetailsViewModel(countryName, repository) as T
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(@Assisted(COUNTRY_NAME_PARAM) countryName: String): CountryDetailsViewModelFactory
     }
 }
+
+private const val COUNTRY_NAME_PARAM = "countryName"
