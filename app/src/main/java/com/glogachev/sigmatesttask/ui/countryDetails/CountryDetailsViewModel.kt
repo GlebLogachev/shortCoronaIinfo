@@ -32,7 +32,7 @@ class CountryDetailsViewModel(
             .loadDetails(countryName)
             .schedule()
             .subscribe { list ->
-                _state.value = CountryDetailsState.Success(list.sortedByDescending { it.date })
+                _state.value = CountryDetailsState.Success(list)
             }
             .addToCd()
     }

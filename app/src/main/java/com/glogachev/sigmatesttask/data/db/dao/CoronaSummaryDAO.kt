@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.glogachev.sigmatesttask.data.db.models.CoronaSummaryDB
+import io.reactivex.Completable
 import io.reactivex.Observable
 
 @Dao
@@ -14,6 +15,6 @@ interface CoronaSummaryDAO {
     fun all(): Observable<List<CoronaSummaryDB>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(value: List<CoronaSummaryDB>)
+    fun insert(value: List<CoronaSummaryDB>): Completable
 
 }

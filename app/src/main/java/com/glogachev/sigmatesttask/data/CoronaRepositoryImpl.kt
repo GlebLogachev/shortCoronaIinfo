@@ -37,8 +37,8 @@ class CoronaRepositoryImpl @Inject constructor(
             .all()
     }
 
-    private fun saveCoronaInfo(countriesList: List<CoronaSummaryDB>) {
-        database
+    private fun saveCoronaInfo(countriesList: List<CoronaSummaryDB>): Completable {
+        return database
             .coronaSummary()
             .insert(countriesList)
     }
@@ -58,6 +58,11 @@ class CoronaRepositoryImpl @Inject constructor(
                 database
                     .coronaCountryDetails()
                     .getCountryDetailsBy(country)
+            }
+            .map {
+                it.sortedByDescending { coronaDetails ->
+                    coronaDetails.date
+                }
             }
     }
 
